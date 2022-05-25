@@ -1,0 +1,30 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/lilys-homework/problem
+'''
+
+
+def solution(a):
+    dico=dict()
+    lenn=len(a)
+    for i in range(lenn):
+        dico[a[i]]=i 
+
+    sorted_a = sorted(a)
+
+    rez = 0
+    
+    for i in range(lenn):
+        if a[i]!=sorted_a[i]:
+            rez+=1
+            swap_index=dico[sorted_a[i]]
+            dico[ a[i] ]=dico[sorted_a[i]]
+            a[swap_index]=a[i]
+            a[i]=sorted_a[i]
+    return rez
+    
+    
+def lilysHomework(a):
+    asc=solution(list(a))
+    desc=solution(list(reversed(a)))
+    return (min(asc,desc))
