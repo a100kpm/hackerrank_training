@@ -1,0 +1,17 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/find-the-running-median/problem
+'''
+
+
+def runningMedian(a):
+    rez=[]
+    temp=[]
+    lenn=len(a)
+    for i in range(lenn):
+        bisect.insort(temp,a[i])
+        if i%2==0:
+            rez.append(temp[int((i)/2)])
+        else:
+            rez.append( (temp[int((i-1)/2)]+temp[int(((i+1)/2))] )/2. )
+    return rez
