@@ -1,0 +1,16 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/most-commons/problem
+'''
+
+
+s = input()
+a=string.ascii_lowercase
+dico=dict()
+for x in a:
+    dico[x]=0
+for x in s:
+    dico[x]+=1
+my_keys = sorted(dico, key=dico.get, reverse=True)[:3]
+for x in my_keys:
+    print(x, dico[x])
