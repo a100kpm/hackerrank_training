@@ -1,0 +1,23 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/ginorts/problem
+'''
+
+
+a=input()
+order="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1357902468"
+lenn=len(order)
+dico=dict()
+for x in order:
+    dico[x]=0
+
+for x in a:
+    dico[x]+=1
+    
+word=''
+for x in dico:
+    if dico[x]>0:
+        for i in range(dico[x]):
+            word+=x
+            
+print(word)
