@@ -1,0 +1,24 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/the-grid-search/problem
+'''
+
+
+def gridSearch(G, P):
+    lenn0=len(G)
+    lenn1=len(G[0])
+    lenp0=len(P)
+    lenp1=len(P[0])
+    val_test=P[0][0]
+    start=[]
+    for i in range(lenn0-lenp0+1):
+        for j in range(lenn1-lenp1+1):
+            if G[i][j]==val_test:
+                start.append([i,j])
+    for x in start:
+        
+        a=G[x[0]:x[0]+lenp0]
+        c=[b[x[1]:x[1]+lenp1] for b in a]
+        if P==c:
+            return "YES"
+    return "NO"
