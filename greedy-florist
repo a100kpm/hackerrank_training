@@ -1,0 +1,15 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/greedy-florist/problem
+'''
+
+def getMinimumCost(k, c):
+    c.sort()
+    score=0
+    mult_price=1
+    while len(c)>k:
+        score+=sum(c[-k:]*mult_price)
+        c=c[:-k]
+        mult_price+=1
+    score+=sum(c)*mult_price
+    return score
