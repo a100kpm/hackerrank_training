@@ -1,0 +1,29 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/countingsort4/problem
+'''
+
+def countSort(arr):
+    list_value=set()
+    dico_value=dict()
+    lenn=len(arr)
+    mid=int(lenn/2)
+    for i in range(lenn):
+        if i<mid:
+            elem='-'
+        else:
+            elem=arr[i][1]
+            
+        value=int(arr[i][0])
+        list_value.add(value)
+        if value in dico_value:
+            dico_value[value]+=" "+elem
+        else:
+            dico_value[value]=elem
+    list_value=sorted(list_value)
+    rez=""
+    for x in list_value:
+        rez+=dico_value[x]+" "
+    rez=rez[:-1]
+    
+    print(rez)
