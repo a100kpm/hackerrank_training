@@ -1,0 +1,37 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/gridland-metro/problem
+'''
+
+
+def removal(listing,col):
+    b = []
+    for begin,end in sorted(listing[1:]):
+        if b and b[-1][1] >= begin - 1:
+            b[-1][1] = max(b[-1][1], end)
+        else:
+            b.append([begin, end])
+    print(listing)
+    for x in b:
+        print(x,x[1]-x[0]+1)
+    rez=0
+    for x in b:
+        rez+=x[1]-x[0]+1
+    return rez
+        
+    
+def gridlandMetro(row, col, track, train):
+
+    rez=row*col
+    dico=dict()
+    for x in train:
+        mini=min(x[1],x[2])
+        maxi=max(x[1],x[2])
+        if x[0] in dico:
+            dico[x[0]].append([mini,maxi])
+        else:
+            dico[x[0]]=[[0,0],[mini,maxi]]
+
+    for x in dico:
+        rez-=removal(dico[x],col)
+    return rez
