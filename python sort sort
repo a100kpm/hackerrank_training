@@ -1,0 +1,29 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/python-sort-sort/problem
+'''
+
+
+nm = input().split()
+
+n = int(nm[0])
+
+m = int(nm[1])
+
+arr = []
+
+for _ in range(n):
+    arr.append(list(map(int, input().rstrip().split())))
+
+k = int(input())
+    
+dictio=dict()
+lenn=len(arr)
+for i in range(lenn):
+    dictio[i]=arr[i][k]
+dictio2=dict(sorted(dictio.items(), key=lambda item: item[1]))
+
+for x in dictio2:
+    a=str(arr[x]).strip('[]')
+    a=a.replace(',','')
+    print(a)
