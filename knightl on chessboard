@@ -1,0 +1,49 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/knightl-on-chessboard/problem
+'''
+
+def fill_grid(grid,i,j,n,pos_x,pos_y,step):
+    if pos_x<0 or pos_y<0 or pos_x>=n or pos_y>=n:
+        return grid
+        
+    if grid[pos_x][pos_y]<=step or grid[-1][-1]<step:
+        return grid
+        
+    grid[pos_x][pos_y]=step
+    step=step+1
+    #print('++ij')
+    grid=fill_grid(grid,i,j,n,pos_x+i,pos_y+j,step)
+    #print('++ji')
+    grid=fill_grid(grid,i,j,n,pos_x+j,pos_y+i,step)
+    #print('+-ij')
+    grid=fill_grid(grid,i,j,n,pos_x+i,pos_y-j,step)
+    #print('+-ji')
+    grid=fill_grid(grid,i,j,n,pos_x+j,pos_y-i,step)
+    #print('-+ij')
+    grid=fill_grid(grid,i,j,n,pos_x-i,pos_y+j,step)
+    #print('-+ji')
+    grid=fill_grid(grid,i,j,n,pos_x-j,pos_y+i,step)
+    #print('--ij')
+    grid=fill_grid(grid,i,j,n,pos_x-i,pos_y-j,step)
+    #print('--ji')
+    grid=fill_grid(grid,i,j,n,pos_x-j,pos_y-i,step)
+    return grid
+
+def calculate_path(i,j,n):
+    n_square=n**2
+    grid=[[n_square]*(n) for _ in range(n)]
+    grid=fill_grid(grid,i,j,n,0,0,0)
+    if grid[-1][-1]==n**2:
+        return -1
+    else:
+        return grid[-1][-1]
+
+def knightlOnAChessboard(n):
+    rez=[[0]*(n-1) for _  in range(n-1)]
+    
+    for i in range(n-1):
+        for j in range(i,n-1):
+            rez[i][j]=calculate_path(i+1,j+1,n)
+            rez[j][i]=rez[i][j]
+    return rez
