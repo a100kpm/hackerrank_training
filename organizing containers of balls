@@ -1,0 +1,34 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/organizing-containers-of-balls/problem
+'''
+
+
+def organizingContainers(container):
+    print(len(container),container)
+    lenn=len(container)
+    lst=[0]*lenn
+    for i in range(lenn):
+        lst=[x + y for x, y in zip(lst,container[i])]
+    size_bucket=[sum(x) for x in container]
+    dico1=dict()
+    dico2=dict()
+    for x in lst:
+        if x not in dico1:
+            dico1[x]=1
+        else:
+            dico1[x]+=1
+    for x in size_bucket:
+        if x not in dico2:
+            dico2[x]=1
+        else:
+            dico2[x]+=1
+            
+    if len(dico1)!=len(dico2):
+        return "Impossible"
+    for x in dico1:
+        if x not in dico2:
+            return "Impossible"
+        if dico1[x]!=dico2[x]:
+            return "Impossible"
+    return "Possible"
