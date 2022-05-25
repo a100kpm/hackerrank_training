@@ -1,0 +1,49 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/the-quickest-way-up/problem
+'''
+
+
+def quickestWayUp(ladders, snakes):
+    l_dict=dict()
+    s_dict=dict()
+    for x in ladders:
+        l_dict[x[0]]=x[1]
+    for x in snakes:
+        s_dict[x[0]]=x[1]
+    rez=[100]*101
+    rez[1]=0
+    list_next=[]
+    for i in range(2,8):
+        rez[i]=1
+        list_next.append(i)
+        if i in l_dict:
+            rez[l_dict[i]]=1
+            list_next.append(l_dict[i])
+    
+    while list_next:
+        
+        indx=list_next.pop(0)
+        val=rez[indx]+1
+        for i in range(indx+1,min(indx+7,101)):
+            if val<rez[i]:
+                rez[i]=val
+                if i in l_dict:
+                    if val<rez[l_dict[i]]:
+                        rez[l_dict[i]]=val
+                        if l_dict[i] not in list_next:
+                            list_next.append(l_dict[i])
+                            
+                elif i in s_dict:
+                    if val<rez[s_dict[i]]:
+                        rez[s_dict[i]]=val
+                        if s_dict[i] not in list_next:
+                            list_next.append(s_dict[i])
+                else:
+                    if i not in list_next:
+                        list_next.append(i)
+                            
+         
+    if rez[-1]==100:
+        return -1
+    return rez[-1]
