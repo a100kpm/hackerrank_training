@@ -1,0 +1,42 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/dijkstrashortreach/problem
+'''
+
+#fail test case 7 due to (apparently) a need of optimization of the reading of the input
+
+
+def shortestReach(n, edges, s):
+    rez=[-1 for x in range(n+1)]
+    rez[s]=0
+    dico_move=dict()
+    next_=[s]
+    val_=[0]
+    for i in range(1,n+1):
+        dico_move[i]=dict()
+    for x in edges:
+        if x[0] not in dico_move[x[1]]:
+            dico_move[x[1]][x[0]]=x[2]
+        else:
+            dico_move[x[1]][x[0]]=min(dico_move[x[1]][x[0]],x[2])
+             
+        if x[1] not in dico_move[x[0]]:
+            dico_move[x[0]][x[1]]=x[2]
+        else:
+            dico_move[x[0]][x[1]]=min(dico_move[x[0]][x[1]],x[2])   
+
+    while next_:
+            min_index=next_.index(min(next_))
+            current_val=val_.pop(min_index)
+            node=next_.pop(min_index)
+            for x in dico_move[node]:
+                value=current_val+dico_move[node][x]
+                if rez[x]==-1 or rez[x]>value:
+                    rez[x]=value
+                    next_.append(x)
+                    val_.append(value)
+            #print(x,rez)
+                
+    rez.pop(s)
+    rez.pop(0)
+    return rez
