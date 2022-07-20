@@ -1,0 +1,34 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/counter-game/problem
+'''
+
+def count_one(val):
+    lenn=len(val)-1
+    score=0
+    for i in range(lenn):
+        if val[i]=='1':
+            score+=1
+    return score
+
+def count_zero(val):
+    lenn=len(val)
+    score=0
+    if val[-1]=='1':
+        return 0
+    for i in range(lenn-2,-1,-1):
+        if val[i]=='0':
+            score+=1
+        else:
+            break
+    return score
+
+def counterGame(n):
+    score=0
+    val=bin(n)
+    val=val[2:]
+    score+=count_zero(val)
+    score+=count_one(val)
+    if score%2==0:
+        return "Richard"
+    return "Louise"
