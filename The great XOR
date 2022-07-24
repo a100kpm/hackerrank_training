@@ -1,0 +1,16 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/the-great-xor/problem
+'''
+
+def theGreatXor(x):
+    x=bin(x)
+    x=x[2:]
+    score=0
+    adder=1
+    x=x[::-1]
+    for z in x:
+        if z=='0':
+            score+=adder
+        adder*=2
+    return score
