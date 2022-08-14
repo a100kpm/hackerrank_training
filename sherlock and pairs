@@ -1,0 +1,20 @@
+'''
+Description of the problem can be found here:
+https://www.hackerrank.com/challenges/sherlock-and-pairs/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
+'''
+
+def solve(a):
+    dico_val=dict()
+    for x in a:
+        if x not in dico_val:
+            dico_val[x]=1
+        else:
+            dico_val[x]+=1
+    score=0
+    for x in dico_val:
+        val=dico_val[x]
+        if val==1:
+            pass
+        else:
+            score+=math.factorial(val)/(math.factorial(2)*math.factorial(val-2))
+    return int(score*2)
